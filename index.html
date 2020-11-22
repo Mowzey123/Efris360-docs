@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cognative Insights: EFRIS360 Documentation</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="./assets/images/demo/favicon.png">  
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="assets/fontawesome/js/all.js"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">  
+      
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    
+</head> 
+
+<body class="body-green">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <img src='./assets/images/demo/favicon.png' style='width:50px;'>
+                            <span class="text-highlight"></span><span class="text-bold">EFRIS360</span>
+                        </a>
+                    </h1>
+                    
+                </div><!--//branding-->
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <!-- <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Quick Start</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: Oct 12th, 2020</div>
+                </div> -->
+                <!--//doc-header-->
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="download-section" class="doc-section">
+                                <h2 class="section-title">Getting Started</h2>
+                                <div class="section-block">
+                                    <p>
+                                        After system initialization and setup, you will be asked to provide 
+                                        email addresses for your users that will be programatically accesing the API.
+                                        Upon succesful intiailization a secrete key will be sent to the respective email address,
+                                        please note that this is highly sensitive peiece of data and should be securly kept.
+                                    </p>
+
+                                    <p>
+                                        <b>Endpoint:</b> The end-point to send data to will alsobe shared by email after successul setup of the offline enabler.
+                                    </p>
+
+                                    <!-- authorization -->
+                                    <div id="downloadstep1"  class="section-block">
+                                        <h3 class="block-title">Authorization</h3>
+                                        <p>
+                                            To acquire a valid jason web token send data to authorization interface 
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/authManagement</p>
+                                        <p><b>Method : </b> /generateAuthToken</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "tinno":"1014650988",
+    "email":"example@gmail.com",
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>tinno</td>
+                                                            <td>Your tin number</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                    </div>
+                                    <!-- authorization -->
+                                    <!-- renew auth -->
+                                    <div id="downloadstep2"  class="section-block">
+                                        <h3 class="block-title">Renew Authorization Token</h3>
+                                        <p>
+                                            The issued JWT above expires within 2hrs period, to renew the token before expiration 
+                                            perfom the request descirbed below. 
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/authManagement</p>
+                                        <p><b>Method : </b> /renewAuthToken</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+{
+    "Authorization":Bearer {{token}}
+}
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>token</td>
+                                                            <td>JWT acquired on succesful authorization</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                </div>
+                            </section><!--//doc-section-->
+                            <section id="installation-section" class="doc-section">
+                                <h2 class="section-title">Inventory Management</h2>
+                                <div id="step1"  class="section-block">
+                                    <h3 class="block-title">Add New Item</h3>
+                                        <p>
+                                            To register a new product as part of you inventory 
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/inventoryManagement</p>
+                                        <p><b>Method : </b> /saveGoods</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+{
+    "Authorization":Bearer {{token}}
+}
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "goods": [
+        {
+            "goodsName": "apple",
+            "goodsCode": "001",
+            "measureUnit": "per stick",
+            "unitPrice": "6999.99",
+            "currency": "UGX",
+            "commodityCategoryId": "10111301",
+            "haveExciseTax": "yes",
+            "description": "apple test",
+            "stockPrewarning": "10",
+            "havePieceUnit":"yes"
+        }
+    ],
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>goodsName</td>
+                                                            <td>Name of the item. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>goodsCode</td>
+                                                            <td>Unique item ID known to you. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>measureUnit</td>
+                                                            <td>Item measure unit. <b style='color:brown;'>Enum: ["per stick","per stick"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>unitPrice</td>
+                                                            <td>Item unit price. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>measureUnit</td>
+                                                            <td>Item measure unit. <b style='color:brown;'>Enum: ["per stick","per stick"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>commodityCategoryId</td>
+                                                            <td>Level 4 Categpory ID. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>haveExciseTax</td>
+                                                            <td>Item measure unit. <b style='color:brown;'>Enum: ["yes","no"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>description</td>
+                                                            <td>Item description. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>stockPrewarning</td>
+                                                            <td>Stock prewarning levels. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>havePieceUnit</td>
+                                                            <td>If item has peice unit. <b style='color:brown;'>Enum: ["yes","no"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <h2 class="section-title">To Get commodityCategoryId</h2>
+                                                <div id="step1"  class="section-block">
+                                                    <h3 class="block-title">Add New Item</h3>
+                                                        <p>
+                                                            goods are categorized in four level hirachy structure,
+                                                            query the top level category to get back all categories Ids that you will use to query for the next categpry 
+                                                            level items until the last level (level 4).
+                                                        </p>
+                                                        <p><b>Interface : </b> /efris_v.0.0.1/categoriesManagement</p>
+                                                        <p><b>Method : </b> /getLevelOneCategories</p>
+                                                        <div class="code-block">
+                                                            <div class="code-block">
+                                                                <h6>Sample Header Body</h6>
+                                                                <pre class="language-javascript">
+{
+    "Authorization":Bearer {{token}}
+}
+                                                                </pre>
+                                                            </div>
+                                                            <div class="code-block">
+                                                                <h6>Sample Request Body</h6>
+                                                                <pre class="language-javascript">
+{
+    "seckey":"{{seckey}}"
+}
+                                                                </pre>
+                                                        </div>
+
+                                                        <p><b>Interface : </b> /efris_v.0.0.1/categoriesManagement</p>
+                                                        <p><b>Method : </b> /getLevelTwoCategories</p>
+                                                        <div class="code-block">
+                                                            <div class="code-block">
+                                                                <h6>Sample Header Body</h6>
+                                                                <pre class="language-javascript">
+{
+    "Authorization":Bearer {{token}}
+}
+                                                                </pre>
+                                                            </div>
+                                                            <div class="code-block">
+                                                                <h6>Sample Request Body</h6>
+                                                                <pre class="language-javascript">
+{   
+    "commodityCategoryLevel": "2",
+    "parentCode": "11000000"
+    "seckey":"{{seckey}}"
+}
+                                                                </pre>
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Key</th>
+                                                                            <th>Description</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>commodityCategoryLevel</td>
+                                                                            <td>the level that you want to fetch next <b style='color:brown;'>(string)</b></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>parentCode</td>
+                                                                            <td>Category ID from the first level cateogry <b style='color:brown;'>(string)</b></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>seckey</td>
+                                                                            <td>Your acquired secret key</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                    
+                                                                <p><b>Interface : </b> /efris_v.0.0.1/categoriesManagement</p>
+                                                                <p><b>Method : </b> /getLevelThreeCategories</p>
+                                                                <div class="code-block">
+                                                                    <div class="code-block">
+                                                                        <h6>Sample Header Body</h6>
+                                                                        <pre class="language-javascript">
+        {
+            "Authorization":Bearer {{token}}
+        }
+                                                                        </pre>
+                                                                    </div>
+                                                                    <div class="code-block">
+                                                                        <h6>Sample Request Body</h6>
+                                                                        <pre class="language-javascript">
+        {   
+            "commodityCategoryLevel": "3",
+            "parentCode": "11100000"
+            "seckey":"{{seckey}}"
+        }
+                                                                        </pre>
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Key</th>
+                                                                                    <th>Description</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>commodityCategoryLevel</td>
+                                                                                    <td>the level that you want to fetch next <b style='color:brown;'>(string)</b></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>parentCode</td>
+                                                                                    <td>Category ID from the first level cateogry <b style='color:brown;'>(string)</b></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>seckey</td>
+                                                                                    <td>Your acquired secret key</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p><b>Interface : </b> /efris_v.0.0.1/categoriesManagement</p>
+                                                                        <p><b>Method : </b> /getLevelFourCategories</p>
+                                                                        <div class="code-block">
+                                                                            <div class="code-block">
+                                                                                <h6>Sample Header Body</h6>
+                                                                                <pre class="language-javascript">
+                {
+                    "Authorization":Bearer {{token}}
+                }
+                                                                                </pre>
+                                                                            </div>
+                                                                            <div class="code-block">
+                                                                                <h6>Sample Request Body</h6>
+                                                                                <pre class="language-javascript">
+                {   
+                    "commodityCategoryLevel": "4",
+                    "parentCode": "11100000"
+                    "seckey":"{{seckey}}"
+                }
+                                                                                </pre>
+                                                                                <table class="table">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Key</th>
+                                                                                            <th>Description</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td>commodityCategoryLevel</td>
+                                                                                            <td>the level that you want to fetch next <b style='color:brown;'>(string)</b></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>parentCode</td>
+                                                                                            <td>Category ID from the first level cateogry <b style='color:brown;'>(string)</b></td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>seckey</td>
+                                                                                            <td>Your acquired secret key</td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                        </div>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="step2"  class="section-block">
+                                    <h3 class="block-title">Increase Stock</h3>
+                                    <p>
+                                        To increase stock quantity of your inventory 
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/inventoryManagement</p>
+                                    <p><b>Method : </b> /addToInventory</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+    "details":{
+        "supplierTin": "1014650988",
+        "supplierName": "Test Supplier",
+        "stockInType": "import",
+        "productionBatchNo":""
+    },
+    "goodsStockIn": [
+        {
+            "commodityGoodsId": "179212327201012786",
+            "quantity": "100",
+            "unitPrice": "12333.99"
+        }
+    ],
+    "seckey":"{{seckey}}"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>supplierTin</td>
+                                                        <td>Source of items tin. <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>supplierName</td>
+                                                        <td>Source Name. <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>stockInType</td>
+                                                        <td>Type of stock in <b style='color:brown;'>Enum: [ "import",
+                                                            "LocalPurchase",
+                                                            "manufacturer"]
+                                                        </b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>productionBatchNo</td>
+                                                        <td>production batch numner. <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>commodityGoodsId</td>
+                                                        <td>Item Id that is known to you <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>quantity</td>
+                                                        <td>Quantity to add to stock <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>unitPrice</td>
+                                                        <td>Item unit price <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+
+                                <div id="step3"  class="section-block">
+                                    <h3 class="block-title">Reduce Stock</h3>
+                                    <p>
+                                        To reduce stock quantity of your inventory 
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/inventoryManagement</p>
+                                    <p><b>Method : </b> /reduceFromInventory</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+    "details":{
+        "supplierTin": "1014650988",
+        "supplierName": "Test Supplier",
+        "stockInType": "import",
+        "productionBatchNo":"",
+        "adjustType":"expiredGoods"
+    },
+    "goodsStockIn": [
+        {
+            "commodityGoodsId": "759568484858828323",
+            "quantity": "1",
+            "unitPrice": "300000.99"
+        }
+    ],
+    "seckey":"{{seckey}}"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>supplierTin</td>
+                                                        <td>Source of items tin. <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>supplierName</td>
+                                                        <td>Source Name. <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>stockInType</td>
+                                                        <td>Type of stock in <b style='color:brown;'>Enum: [ "import",
+                                                            "LocalPurchase",
+                                                            "manufacturer"]
+                                                        </b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>productionBatchNo</td>
+                                                        <td>production batch number. <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>adjustType</td>
+                                                        <td>Adjustment type. <b style='color:brown;'> ENUM: [
+                                                            "expiredGoods",
+                                                            "damagedGoods",
+                                                            "personalUses",
+                                                            "rawMaterials",
+                                                            "Other"    
+                                                        ]</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>commodityGoodsId</td>
+                                                        <td>Item Id that is known to you <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>quantity</td>
+                                                        <td>Quantity to add to stock <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>unitPrice</td>
+                                                        <td>Item unit price <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="step4"  class="section-block">
+                                    <h3 class="block-title">Query Paginated Stock Records</h3>
+                                    <p>
+                                        To get stock paginated records
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/inventoryManagement</p>
+                                    <p><b>Method : </b> /goodsOrServiceInquiry</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+    "pageNo": "1",
+    "pageSize": "50",
+    "seckey":"{{seckey}}"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>pageNo</td>
+                                                        <td>Page to return</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>pageSize</td>
+                                                        <td>Number of items per page</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="step5"  class="section-block">
+                                    <h3 class="block-title">Query Normal Stock Records</h3>
+                                    <p>
+                                        To get stock paginated records
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/inventoryManagement</p>
+                                    <p><b>Method : </b> /getAllGoods</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+    "seckey":"{{seckey}}"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="step6"  class="section-block">
+                                    <h3 class="block-title">Query Stock By ID</h3>
+                                    <p>
+                                        To query stock by unique goodsCode
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/inventoryManagement</p>
+                                    <p><b>Method : </b> /queryStockByGoodId</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{   
+    "id": "128543675996788489",
+    "seckey":"{{seckey}}"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>id</td>
+                                                        <td>goods code known to you</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                            </section><!--//doc-section-->
+                            
+                            <section id="code-section" class="doc-section">
+                                <h2 class="section-title">Invoice Management</h2>
+                            
+                                <div id="invoice1" class="section-block">
+                                    <div id="step6"  class="section-block">
+                                        <h3 class="block-title">Upload Invoice</h3>
+                                        <p>
+                                            To register a new invoice
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/invoiceManagement</p>
+                                        <p><b>Method : </b> /invoiceUpload</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+    {
+    "Authorization":Bearer {{token}}
+    }
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "buyer":{
+        "tin":"1001460538",
+        "email":"molutalo@gmail.com"
+    },
+    "basicInfo":{
+        "invoiceKind":"reciept",
+        "issueDate":"05/09/2020",
+        "currency":"UGX"
+    },
+    "goods":[
+        {
+            "goodsCode":"5786",
+            "qty":1,
+            "paymentMethod":"mobileMoney",
+            "amount":12333.99,
+            "orderNumber":"ahjhh",
+            "isDiscounted":"no"
+        }
+    ],
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>tin</td>
+                                                            <td>Buyer TIN number <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>email</td>
+                                                            <td>Buyer email <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>invoiceKind</td>
+                                                            <td>Type of document submited <b style='color:brown;'>ENUM : ["reciept","invoice"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>issueDate</td>
+                                                            <td>Invoice issue date <b style='color:brown;'>DD/MM/YYYY</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>currency</td>
+                                                            <td>Transacting currency <b style='color:brown;'>ENUM : ["USD","USD"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>goodsCode</td>
+                                                            <td>Item identifier known to you <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>qty</td>
+                                                            <td>Quantity sold <b style='color:brown;'>(number)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>amount</td>
+                                                            <td>selling amount <b style='color:brown;'>(number)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>orderNumber</td>
+                                                            <td>unique order identifier <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>isDiscounted</td>
+                                                            <td>Transacting currency <b style='color:brown;'>ENUM : ["no","yes","onAmount"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                    </div><!--//section-block-->
+                                </div><!--//section-block-->
+                                <div id="invoice2" class="section-block">
+                                    <div id="step6"  class="section-block">
+                                        <h3 class="block-title">Query Invoice List</h3>
+                                        <p>
+                                            To query paginated list of all recorded invoices
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/invoiceManagement</p>
+                                        <p><b>Method : </b> /queryNormalInvoicesOrReceipt</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+    {
+    "Authorization":Bearer {{token}}
+    }
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "pageNo":"1",
+    "pageSize":"10",
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>pageNo</td>
+                                                            <td>page to return <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>pageSize</td>
+                                                            <td>Number of invoices per page <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                    </div><!--//section-block-->
+                                </div><!--//section-block-->
+                                <div id="invoice3" class="section-block">
+                                    <div id="step6"  class="section-block">
+                                        <h3 class="block-title">Query Invoice By InvoiceID</h3>
+                                        <p>
+                                            To query invoice details
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/invoiceManagement</p>
+                                        <p><b>Method : </b> /getInvoiceByInvoiceNo</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+    {
+    "Authorization":Bearer {{token}}
+    }
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "invoiceNo": "120012410719",
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>invoiceNo</td>
+                                                            <td>unique invoice identifier <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                    </div><!--//section-block-->
+                                </div><!--//section-block-->
+                            </section>
+                          
+                            <section id="callouts-section" class="doc-section">
+                                <h2 class="section-title">Credit Note Management</h2>
+                                <div id="credit1" class="section-block">
+                                        <h3 class="block-title">Add New Credit Note</h3>
+                                        <p>
+                                            To add a new credit note
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/creditNoteManagement</p>
+                                        <p><b>Method : </b> /creditNoteApplication</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+    {
+    "Authorization":Bearer {{token}}
+    }
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "originalInvoiceId": "239386330811599875",
+    "originalInvoiceNo": "120012413428",
+    "reason": "reason",
+    "currency": "UGX",
+    "contactName": "Moses",
+    "contactMobileNum": "0705192591",
+    "contactEmail": "molutalo@gmail.com",
+    "remarks":"remarks",
+    "sellersReferenceNo":"5623wteghw",
+    "goods":[
+        {
+            "goodsCode":"5786",
+            "qty":1,
+            "paymentMethod":"mobileMoney",
+            "amount":300000.99,
+            "orderNumber":"a"
+        }
+    ]
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>originalInvoiceId</td>
+                                                            <td>Original Invoice ID <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>originalInvoiceNo</td>
+                                                            <td>Original Invoice No <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>reason</td>
+                                                            <td>Reason for issueing credit note <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>currency</td>
+                                                            <td>currency <b style='color:brown;'> ENUM: ["USD","UGX"]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>contactName</td>
+                                                            <td>Who should be contacted <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>contactMobileNum</td>
+                                                            <td>Contact mobile number <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>contactEmail</td>
+                                                            <td>Contact email <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>remarks</td>
+                                                            <td>remakrds <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>sellersReferenceNo</td>
+                                                            <td>Sellers reference Number <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>goodsCode</td>
+                                                            <td>item identifier know to you <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>qty</td>
+                                                            <td>Quantity <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>paymentMethod</td>
+                                                            <td>payment Method used <b style='color:brown;'> ENUM : [
+                                                                "credit",
+                                                                "cash",
+                                                                "cheque",
+                                                                "demandDraft",
+                                                                "mobileMoney",
+                                                                "visaOrMaterCard",
+                                                                "EFT",
+                                                                "POS",
+                                                                "RTGS",
+                                                                "swiftTransfer"
+                                                            ]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>amount</td>
+                                                            <td>transaction amount <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>orderNumber</td>
+                                                            <td>Unique Order identifier <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="credit2" class="section-block">
+                                        <h3 class="block-title">Query List Of CreditNotes</h3>
+                                        <p>
+                                            To get paginated list of creditnotes
+                                        </p>
+                                        <p><b>Interface : </b> /efris_v.0.0.1/creditNoteManagement</p>
+                                        <p><b>Method : </b> /NoteApplicationListQuery</p>
+                                        <div class="code-block">
+                                            <div class="code-block">
+                                                <h6>Sample Header Body</h6>
+                                                <pre class="language-javascript">
+    {
+    "Authorization":Bearer {{token}}
+    }
+                                                </pre>
+                                            </div>
+                                            <div class="code-block">
+                                                <h6>Sample Request Body</h6>
+                                                <pre class="language-javascript">
+{
+    "referenceNo": "",
+    "oriInvoiceNo": "",
+    "invoiceNo": "",
+    "combineKeywords": "",
+    "approveStatus": "",
+    "queryType": "currentUsersList",
+    "invoiceApplyCategoryCode": "",
+    "startDate": "",
+    "endDate": "",
+    "pageNo": "1",
+    "pageSize": "10",
+    "seckey":"{{seckey}}"
+}
+                                                </pre>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Key</th>
+                                                            <th>Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>referenceNo</td>
+                                                            <td>Credit Note reference No. <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>oriInvoiceNo</td>
+                                                            <td>Original Invoice No <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>combineKeywords</td>
+                                                            <td>Keywords to search for <b style='color:brown;'>(string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>approveStatus</td>
+                                                            <td>search by approve status <b style='color:brown;'> ENUM: [
+                                                                "approve",
+                                                                "decline"    
+                                                            ]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>queryType</td>
+                                                            <td>Who should be contacted <b style='color:brown;'> ENUM : [
+                                                                "currentUsersList",
+                                                                "currentUserApproval",
+                                                                "externalCreditNotes"   
+                                                            ]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>invoiceApplyCategoryCode</td>
+                                                            <td>Contact mobile number <b style='color:brown;'> ENUM : [
+                                                                "cancelDebitNote",
+                                                                "cancelCreditNote"    
+                                                            ]</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>startDate</td>
+                                                            <td>start date <b style='color:brown;'>"DD-MM-YYYY</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>endDate</td>
+                                                            <td>start date <b style='color:brown;'>"DD-MM-YYYY</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>pageNo</td>
+                                                            <td>Page to return <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>pageSize</td>
+                                                            <td>Number of docuemnts per page <b style='color:brown;'> (string)</b></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td>seckey</td>
+                                                            <td>Your acquired secret key</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div><!--//table-responsive-->
+                                        </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="credit3" class="section-block">
+                                    <h3 class="block-title">Query Credit Note By ID</h3>
+                                    <p>
+                                        To get credit note dtails
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/creditNoteManagement</p>
+                                    <p><b>Method : </b> /creditNoteApplicationDetails</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+"id": "239569009574857828"
+"seckey":"{{seckey}}"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>id</td>
+                                                        <td>Credit Note Identifier <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="credit4" class="section-block">
+                                    <h3 class="block-title">Cancel Credit Or Debit Note</h3>
+                                    <p>
+                                        To cancel credit or debit note
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/creditNoteManagement</p>
+                                    <p><b>Method : </b> /cancelCreditOrDebitNoteApplication</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+    "invoiceId": "31000000000000000001",
+    "invoiceNo": "786059685752403327",
+    "reason": "reason",
+    "invoiceApplyCategoryCode": "cancelofDebitNote"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>invoiceId</td>
+                                                        <td>Invoice ID <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>invoiceNo</td>
+                                                        <td>Invoice No <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>reason</td>
+                                                        <td>Reason for cancelling <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="credit5" class="section-block">
+                                    <h3 class="block-title">Approve Credit Or Debit Note</h3>
+                                    <p>
+                                        To Approve credit or debit note
+                                    </p>
+                                    <p><b>Interface : </b> /efris_v.0.0.1/creditNoteManagement</p>
+                                    <p><b>Method : </b> /creditOrDebitNoteApproval</p>
+                                    <div class="code-block">
+                                        <div class="code-block">
+                                            <h6>Sample Header Body</h6>
+                                            <pre class="language-javascript">
+{
+"Authorization":Bearer {{token}}
+}
+                                            </pre>
+                                        </div>
+                                        <div class="code-block">
+                                            <h6>Sample Request Body</h6>
+                                            <pre class="language-javascript">
+{
+    "referenceNo": "21PL010080214",
+    "approveStatus": "approve",
+    "taskId": "1",
+    "remark": "Remarks"
+}
+                                            </pre>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Key</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>referenceNo</td>
+                                                        <td>Invoice ID or CreditNote ID <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>approveStatus</td>
+                                                        <td>Invoice No <b style='color:brown;'>ENUM : [
+                                                            "approve",
+                                                            "decline"
+                                                        ]</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>taskId</td>
+                                                        <td>task Identifier <b style='color:brown;'>()string</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>remarks</td>
+                                                        <td>remarks <b style='color:brown;'>(string)</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>seckey</td>
+                                                        <td>Your acquired secret key</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!--//table-responsive-->
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                            </section><!--//doc-section-->
+                          
+                        </div><!--//content-inner-->
+                    </div><!--//doc-content-->
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+	                        
+	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+	                                <a class="nav-link scrollto" href="#download-section">Getting Started
+                                        <nav class="doc-sub-menu nav flex-column">
+                                            <a class="nav-link scrollto" href="#downloadstep1">Authorization</a>
+                                            <a class="nav-link scrollto" href="#downloadstep2">Renew Authorization</a>
+                                        </nav><!--//nav-->
+                                    </a>
+	                                <a class="nav-link scrollto" href="#installation-section">Inventory Management</a>
+                                    <nav class="doc-sub-menu nav flex-column">
+                                        <a class="nav-link scrollto" href="#step1">Add New Item</a>
+                                        <a class="nav-link scrollto" href="#step1">Goods Category
+                                            <nav class="doc-sub-menu nav flex-column">
+                                                <a class="nav-link scrollto" href="#cat1"> <b>=></b> Level One Categories</a>
+                                                <a class="nav-link scrollto" href="#cat2"> <b>=></b> Level Two Categories</a>
+                                                <a class="nav-link scrollto" href="#cat2"> <b>=></b> Level Three Categories</a>
+                                                <a class="nav-link scrollto" href="#cat2"> <b>=></b> Level Four Categories</a>
+                                            </nav>
+                                        </a>
+                                        <a class="nav-link scrollto" href="#step2">Increase Stock</a>
+                                        <a class="nav-link scrollto" href="#step3">Reduce Stock</a>
+                                        <a class="nav-link scrollto" href="#step4">Query Paginated List</a>
+                                        <a class="nav-link scrollto" href="#step5">Query Normal List</a>
+                                        <a class="nav-link scrollto" href="#step6">Query Item By ID</a>
+                                    </nav><!--//nav-->
+	                                <a class="nav-link scrollto" href="#code-section">Invoice Management</a>
+                                    <nav class="doc-sub-menu nav flex-column">
+                                        <a class="nav-link scrollto" href="#invoice1">Upload Invoice</a>
+                                        <a class="nav-link scrollto" href="#invoice2">Query Invoice List</a>
+                                        <a class="nav-link scrollto" href="#invoice3">Query Invoice By InvoiceId</a>
+                                    </nav><!--//nav-->
+                                    <a class="nav-link scrollto" href="#callouts-section">Credit Notes Management</a>
+                                    <nav class="doc-sub-menu nav flex-column">
+                                        <a class="nav-link scrollto" href="#credit1">Add New CreditNote</a>
+                                        <a class="nav-link scrollto" href="#credit2">Query List Of Notes</a>
+                                        <a class="nav-link scrollto" href="#credit3">Query Credit Note Details</a>
+                                        <a class="nav-link scrollto" href="#credit4">Approve Credit Or Debit Note</a>
+                                        <a class="nav-link scrollto" href="#credit5">Cancel Credit Or Debit Note</a>
+                                    </nav>
+	                            </nav><!--//doc-menu-->
+	                        
+                        </div>
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+           
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://cognativeinsights.com/" target="_blank">Congative Insights</a></small>
+            
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+     
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>      
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>                                                             
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    
+</body>
+</html> 
+
